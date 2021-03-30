@@ -1,4 +1,6 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,8 +13,15 @@
         <div class="container">
             <div class="regbox box">
                 <img class="avatar" src="img/collaboration.png">
-                <h1>Страница регистрации</h1>
-<form action="reg" method="POST">
+                <h1><c:choose>
+                    <c:when test="${requestScope.error}">
+                        <p style="color:white;">${requestScope.message}</p>
+                    </c:when>
+                    <c:otherwise>
+                        <p>Страница регистрации</p>
+                    </c:otherwise>
+                </c:choose></h1>
+                <form action="signUp" method="POST">
                    <p>ФИО</p>
 <input type="text" placeholder="Введите имя" name="name" required>
                    <p>Логин</p>

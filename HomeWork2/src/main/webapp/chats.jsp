@@ -16,20 +16,24 @@
              <div class="regbox box">
     <h3>Сообщения</h3>
 
-    <% ArrayList<String> messages = UserInMessenger.usersInMessenger.get(session.getAttribute("login")).getMessage(); %>
 
-    <%= "Сообщение от " + session.getAttribute("login") + ":" %>
+        <% ArrayList<String> messages = UserInMessenger.usersInMessenger.get(session.getAttribute("login")).getMessage(); %>
+
+
+    <%= "Сообщение для " + session.getAttribute("login") + ":" %>
 
     <br>
 
     <%
-    for(int i = 0; i < messages.size(); i++) {
-        out.println(messages.get(i)); %>
+            for(int i = 0; i < messages.size(); i++) {
+                out.println(messages.get(i));
+                } %>
         <br/>
-    <%  }
-    %>
 
-    <br/>
+
+
+
+
 
     <form action="message" method="GET">
                 <input type="submit" value="Обратно в чат">

@@ -11,10 +11,34 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-
-@WebServlet(name = "LoginServlet", urlPatterns = "/login")
+/**
+ * Cервлет, отвечающий за аутентификацию пользователя, при удачном завершении которой
+ * происходит переадресация на главную страницу чата  {@link MessengerServlet}.
+ */
+@WebServlet(name = "LoginServlet", urlPatterns = "/signIn")
 public class LoginServlet extends HttpServlet {
-
+    /**
+     * Метод, обрабатывающий GET запросы
+     * @param req - запрос от пользователя
+     * @param resp - ответ пользователю
+     * @throws IOException - ошибка ввода-вывода
+     * @see IOException
+     * @throws ServletException - ошибка, связанная с обращением к сервлету
+     * @see ServletException
+     */
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("signIn.jsp").forward(req, resp);
+    }
+    /**
+     * Метод, обрабатывающий POST запросы
+     * @param req - запрос от пользователя
+     * @param resp - ответ пользователю
+     * @throws IOException - ошибка ввода-вывода
+     * @see IOException
+     * @throws ServletException - ошибка, связанная с обращением к сервлету
+     * @see ServletException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -22,11 +46,15 @@ public class LoginServlet extends HttpServlet {
         String Password = req.getParameter("password");
 
         if (!UserInMessenger.usersInMessenger.containsKey(Login)) {
-            throw new IllegalArgumentException("User with this Login is no registered!");
+            req.setAttribute("error", true);
+            req.setAttribute("message", "Пользователь с таким логином не найден");
+            req.getRequestDispatcher("signIn.jsp").forward(req, resp);
         }
         if (UserInMessenger.usersInMessenger.containsKey(Login)) {
             if (!UserInMessenger.usersInMessenger.get(Login).getPassword().equals(Password)) {
-                throw new IllegalArgumentException("Bad Password");
+                req.setAttribute("error", true);
+                req.setAttribute("message", "Неверный пароль");
+                req.getRequestDispatcher("signIn.jsp").forward(req, resp);
             }
         }
         HttpSession session = req.getSession();

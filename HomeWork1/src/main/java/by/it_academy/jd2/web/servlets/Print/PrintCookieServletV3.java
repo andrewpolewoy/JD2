@@ -4,25 +4,37 @@ import by.it_academy.jd2.core.dto.Person;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.Objects;
 
+/**
+ * Cервлет, в котором через заголовок(HEADER) можно указать откуда брать данные(сессия либо куки).
+ * При наличии и соответствии всех параметров выводит указанные параметры на экран.
+ */
 @WebServlet(name = "PrintCookieServletV3", urlPatterns = "/printCookieV3")
 public class PrintCookieServletV3 extends HttpServlet {
 
+    /** Поле имя */
     private static final String FIRST_PARAM = "firstname";
+    /** Поле фамилия */
     private static final String LAST_PARAM = "lastname";
+    /** Поле возраст */
     private static final String AGE_PARAM = "age";
-
+    /** Поле куки */
     private static final String nameStorage1 = "cookies";
+    /** Поле сессия */
     private static final String nameStorage2 = "sessions";
 
-
+    /**
+     * Метод, обрабатывающий GET запросы
+     * @param req - запрос от пользователя
+     * @param resp - ответ пользователю
+     * @throws IOException - ошибка ввода-вывода
+     * @see IOException
+     * @throws ServletException - ошибка, связанная с обращением к сервлету
+     * @see ServletException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -44,8 +56,10 @@ public class PrintCookieServletV3 extends HttpServlet {
                 if (first == null || last == null || age == null) {
                     if (!session.isNew()) {
                         user = (Person) session.getAttribute("person");
+                    }else{
+                        throw new IllegalArgumentException("not all parameters");
                     }
-                    throw new IllegalArgumentException("not all parameters");
+
                 }
                 session.setAttribute("person", user);
 //                user = (Person) session.getAttribute("person");

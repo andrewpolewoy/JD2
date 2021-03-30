@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.util.*, java.text.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
  <head>
@@ -14,9 +15,16 @@
  <body>
        <div class="container">
             <div class="regboxx box">
-
-    <h1>Отправь сообщение: </h1>
-    <form action="mess" method="POST">
+                <img class="avatar" src="img/collaboration.png">
+    <h1><c:choose>
+      <c:when test="${requestScope.error}">
+          <p style="color:white;">${requestScope.message}</p>
+      </c:when>
+      <c:otherwise>
+          <p>Отправь сообщение:</p>
+      </c:otherwise>
+                    </c:choose></h1>
+    <form action="message" method="POST">
         <p>Отправить кому:</p>
      <input type="text" name="login" required>
         <p>Сообщение:</p>
