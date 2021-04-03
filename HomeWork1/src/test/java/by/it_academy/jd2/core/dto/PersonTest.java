@@ -4,7 +4,7 @@ package by.it_academy.jd2.core.dto;
 import org.junit.jupiter.api.*;
 
 @DisplayName("Класс Person, предназначенный для создания человека")
-class PersonTest {
+public class PersonTest {
     private  Person person1;
     private  Person person2;
     private  Person person3;
@@ -74,7 +74,7 @@ class PersonTest {
 
     @DisplayName("Тест для изменения имени пользователя")
     @Test
-    void setFirstname() {
+    public void setFirstname() {
         String actual1 = "Алкександр";
         person1.setFirstname(actual1);
         Assertions.assertEquals(person1.getFirstname(),actual1);
@@ -89,7 +89,7 @@ class PersonTest {
     }
     @DisplayName("Тест получения возраста пользователя")
     @Test
-    void getAge() {
+    public void getAge() {
         String inspected1 =  String.valueOf(person1.getAge()) ;
         String actual1 = "35";
         Assertions.assertEquals(inspected1,actual1);
@@ -105,7 +105,7 @@ class PersonTest {
 
     @DisplayName("Тест для изменения даты пользователя")
     @Test
-    void setAge() {
+    public void setAge() {
         String actual1 = "35";
         person1.setAge(actual1);
         Assertions.assertEquals(String.valueOf(person1.getAge()),actual1);

@@ -2,31 +2,41 @@ package by.it_academy.jd2.core.dto;
 
 
 import org.junit.jupiter.api.*;
-import java.util.HashMap;
-import static org.junit.jupiter.api.Assertions.*;
 
-class UserInMessengerTest {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class UserInMessengerTest {
     private  UserInMessenger user1;
     private  UserInMessenger user2;
     private  UserInMessenger user3;
     public static HashMap<String, UserInMessenger> usersInMessenger = new HashMap<>();
+    private ArrayList<String> message = new ArrayList<>(Arrays.asList("какое-то сообщение"));
 
     @BeforeEach
     public void setUpEach() throws Exception {
         user1 = new UserInMessenger("Максимов", "LAMA", "3558","12.12.59");
         user2 = new UserInMessenger("PETROVICH", "12кило", "34kilo","11.11.87");
         user3 = new UserInMessenger("Гайдукова", "LAMA", "hhYu","25.04.96");
+
+
     }
+
     @AfterEach
     public void tearDownEach() throws Exception {
         UserInMessenger user1 = null;
         UserInMessenger user2 = null;
         UserInMessenger user3 = null;
+
     }
 
     @DisplayName("Тест сохранения пользователя")
     @Test
-    void saveUser() {
+    public void saveUser() {
         UserInMessenger.saveUser("LAMA", user1);
         UserInMessenger.saveUser("12кило", user2);
 
@@ -36,18 +46,9 @@ class UserInMessengerTest {
         assertNotNull(thrown.getMessage());
     }
 
-    @DisplayName("Нет смысла. Т.к. отображаются сообщения пользователя, вошедшего в систему")
-    @Test
-    void getMessage() {
-    }
-    @DisplayName("Нет смысла. Т.к. отображаются сообщения пользователя, вошедшего в систему")
-    @Test
-    void setMessage() {
-    }
-
     @DisplayName("Тест получения имени пользователя")
     @Test
-    void getName() {
+    public void getName() {
         String inspected1 =  user1.getName();
         String actual1 = "Максимов";
         Assertions.assertEquals(inspected1,actual1);
@@ -63,10 +64,7 @@ class UserInMessengerTest {
 
     @DisplayName("Тест получения логина пользователя")
     @Test
-    void getLogin() {
-        user1 = new UserInMessenger("Максимов", "LAMA", "3558","12.12.59");
-        user2 = new UserInMessenger("PETROVICH", "12кило", "34kilo","11.11.87");
-        user3 = new UserInMessenger("Гайдукова", "LAMA", "hhYu","25.04.96");
+    public void getLogin() {
         String inspected1 =  user1.getLogin();
         String actual1 = "LAMA";
         Assertions.assertEquals(inspected1,actual1);
@@ -82,7 +80,7 @@ class UserInMessengerTest {
 
     @DisplayName("Тест получения пароля пользователя")
     @Test
-    void getPassword() {
+    public void getPassword() {
         String inspected1 =  user1.getPassword();
         String actual1 = "3558";
         Assertions.assertEquals(inspected1,actual1);
@@ -98,7 +96,7 @@ class UserInMessengerTest {
 
     @DisplayName("Тест получения даты рождения пользователя")
     @Test
-    void getBirth_day() {
+    public void getBirth_day() {
         String inspected1 =  user1.getBirth_day();
         String actual1 = "12.12.59";
         Assertions.assertEquals(inspected1,actual1);

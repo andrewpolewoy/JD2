@@ -75,26 +75,13 @@ public class UserInMessenger {
         return name;
     }
     /**
-     * Метод определения имени {@link UserInMessenger#message}
-     * @param name - имя
-     */
-    private void setName(String name) {
-        this.name = name;
-    }
-    /**
      * Метод получения значения поля {@link UserInMessenger#login}
      * @return возвращает логин
      */
     public String getLogin() {
         return login;
     }
-    /**
-     * Метод определения логина {@link UserInMessenger#login}
-     * @param login - логин
-     */
-    private void setLogin(String login) {
-        this.login = login;
-    }
+
     /**
      * Метод получения значения поля {@link UserInMessenger#password}
      * @return возвращает пароль
@@ -102,13 +89,7 @@ public class UserInMessenger {
     public String getPassword() {
         return password;
     }
-    /**
-     * Метод определения пароля {@link UserInMessenger#password}
-     * @param password - пароль
-     */
-    private void setPassword(String password) {
-        this.password = password;
-    }
+
     /**
      * Метод получения значения поля {@link UserInMessenger#birth_day}
      * @return возвращает дату рождения
@@ -116,12 +97,6 @@ public class UserInMessenger {
     public String getBirth_day() {
         return birth_day;
     }
-    /**
-     * Метод определения даты рождения {@link UserInMessenger#birth_day}
-     * @param birth_day - дата рождения
-     */
-    private void setBirth_day(String birth_day) {
-        this.birth_day = birth_day;
-    }
+
 
 }

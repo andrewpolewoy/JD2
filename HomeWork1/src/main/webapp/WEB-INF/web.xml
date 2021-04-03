@@ -4,9 +4,5 @@
          https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          metadata-complete="false">
     <display-name>M-JD2-XXX-XX</display-name>
-    
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
 
 </web-app>

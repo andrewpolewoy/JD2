@@ -1,8 +1,6 @@
 package by.it_academy.jd2.web.servlets;
 
-import by.it_academy.jd2.core.dto.User;
 import by.it_academy.jd2.core.dto.UserInMessenger;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+
 /**
  * Cервлет, отвечающий за аутентификацию пользователя, при удачном завершении которой
  * происходит переадресация на главную страницу чата  {@link MessengerServlet}.
