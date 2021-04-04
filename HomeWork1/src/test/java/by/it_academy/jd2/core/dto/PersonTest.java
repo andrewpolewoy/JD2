@@ -13,13 +13,22 @@ public class PersonTest {
     public void setUpEach() throws Exception {
         person1 = new Person("Максимов", "Алкександр", "35");
         person2 = new Person("PETROVICH", "MIHAIL", "34");
-        person3 = new Person("Гайдукова", "Анна", "7");
+        person3 = new Person("Гайдукова", "Анна", null);
     }
     @AfterEach
     public void tearDownEach() throws Exception {
          Person person1 = null;
          Person person2 = null;
          Person person3 = null;
+    }
+
+    @DisplayName("Конструктор класса пользователя")
+    @Test
+    public void Person(){
+        person3 = new Person("Гайдукова", "Анна", null);
+        Assertions.assertEquals("Гайдукова",person3.getLastname());
+        Assertions.assertEquals("Анна",person3.getFirstname());
+        Assertions.assertEquals(0,person3.getAge());
     }
 
     @DisplayName("Тест получения фамилии пользователя")
@@ -99,7 +108,7 @@ public class PersonTest {
         Assertions.assertEquals(inspected2,actual2);
 
         String inspected3 =  String.valueOf(person3.getAge());
-        String actual3 = "7";
+        String actual3 = "0";
         Assertions.assertEquals(inspected3,actual3);
     }
 
@@ -114,8 +123,8 @@ public class PersonTest {
         person2.setAge(actual2);
         Assertions.assertEquals(String.valueOf(person2.getAge()),actual2);
 
-        String actual3 = "7";
-        person2.setAge(actual3);
-        Assertions.assertEquals(String.valueOf(person3.getAge()),actual3);
+        String actual3 = null;
+        person3.setAge(actual3);
+        Assertions.assertEquals(String.valueOf(person3.getAge()),"0");
     }
 }

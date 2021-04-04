@@ -4,7 +4,7 @@ package by.it_academy.jd2.core.dto;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -15,14 +15,15 @@ public class UserInMessengerTest {
     private  UserInMessenger user2;
     private  UserInMessenger user3;
     public static HashMap<String, UserInMessenger> usersInMessenger = new HashMap<>();
-    private ArrayList<String> message = new ArrayList<>(Arrays.asList("какое-то сообщение"));
+    private ArrayList<String> message;
 
     @BeforeEach
     public void setUpEach() throws Exception {
         user1 = new UserInMessenger("Максимов", "LAMA", "3558","12.12.59");
         user2 = new UserInMessenger("PETROVICH", "12кило", "34kilo","11.11.87");
         user3 = new UserInMessenger("Гайдукова", "LAMA", "hhYu","25.04.96");
-
+        message = new ArrayList<>(Collections.singletonList("какое-то сообщение"));
+        user3.setMessage(message);
 
     }
 
@@ -44,6 +45,22 @@ public class UserInMessengerTest {
             UserInMessenger.saveUser("LAMA", user3);
         });
         assertNotNull(thrown.getMessage());
+    }
+
+
+    @DisplayName("Тест получения сообщений пользователя")
+    @Test
+    public void getMessage() {
+        ArrayList<String> inspected1 =  user3.getMessage();
+        Assertions.assertEquals(message,inspected1);
+    }
+
+    @DisplayName("Тест сохранения сообщений пользователя")
+    @Test
+    public void setMessage() {
+        message = new ArrayList<>(Collections.singletonList("КаКое????? СсСообщен.е"));
+        user3.setMessage(message);
+        Assertions.assertEquals(message,user3.getMessage());
     }
 
     @DisplayName("Тест получения имени пользователя")
