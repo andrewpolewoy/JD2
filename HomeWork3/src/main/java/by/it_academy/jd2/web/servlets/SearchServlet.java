@@ -31,9 +31,7 @@ public class SearchServlet extends HttpServlet {
      * Метод инициализации, который создаёт объекты класса {@link AirportDAO#AirportDAO}
      * и класса {@link FlightsDAO#FlightsDAO}
      */
-    @Override
-    public void init() {
-
+    public SearchServlet() {
         airportDAO = new AirportDAO();
         flightsDAO = new FlightsDAO();
     }
@@ -67,23 +65,43 @@ public class SearchServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        List<Airport> airports = null;
+        try {
+            airports = airportDAO.list();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        req.setAttribute("airports", airports);
         String dateDeparture = req.getParameter("dateDeparture");
         String airportDeparture = req.getParameter("airportDeparture");
         String airportArrival = req.getParameter("airportArrival");
-
+        if (dateDeparture == null ||  airportDeparture == null ||  airportArrival == null){
+            resp.sendRedirect(req.getContextPath() + "/search");
+        }else {
             try {
                 List<Flights> flights = flightsDAO.list(dateDeparture, airportDeparture, airportArrival);
-                req.setAttribute("flights", flights);
-                req.getRequestDispatcher("search.jsp").forward(req, resp);
+                if (flights.isEmpty()){
+                    req.setAttribute("error", true);
+                    req.setAttribute("message", "Ничего не найдено");
+//                    ServletContext context = getServletContext();
+//                    RequestDispatcher dispatcher = context.getRequestDispatcher("/search");
+//                    dispatcher.forward(req,resp);
+                    req.getRequestDispatcher("search.jsp").forward(req, resp);
+
+//                    req.getRequestDispatcher("search.jsp").forward(req, resp);
+                }else {
+                    req.setAttribute("flights", flights);
+                    req.setAttribute("flight", true);
+                    req.getRequestDispatcher("search.jsp").forward(req, resp);
+
+                }
+
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        if (dateDeparture == null ||  airportDeparture == null ||  airportArrival == null || req.getAttribute("flights") == null){
-            ServletContext context = getServletContext();
-            RequestDispatcher dispatcher = context.getRequestDispatcher("/search");
-            resp.sendRedirect(req.getContextPath() + "/search");
         }
+
+
 
 
     }
