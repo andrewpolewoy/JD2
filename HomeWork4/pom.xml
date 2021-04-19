@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>by.it-academy.jd2</groupId>
-    <artifactId>HomeWork3</artifactId>
+    <artifactId>HomeWork4</artifactId>
     <version>0.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>HomeWork3</name>
+    <name>HomeWork4</name>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -21,7 +21,6 @@
     </properties>
 
     <dependencies>
-
         <!-- https://mvnrepository.com/artifact/c3p0/c3p0 -->
         <dependency>
             <groupId>com.mchange</groupId>
@@ -124,7 +123,9 @@
                 <version>0.8.6</version>
                 <configuration>
                     <excludes>
-                        <exclude>by/it_academy/jd2/**/*</exclude>
+                        <exclude>by/it_academy/jd2/messenger/controller/web/**/*</exclude>
+                        <exclude>by/it_academy/jd2/messenger/model/*</exclude>
+                        <exclude>by/it_academy/jd2/messenger/view/api/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

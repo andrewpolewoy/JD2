@@ -1,0 +1,68 @@
+<web-app version="5.0" xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+         https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         metadata-complete="false">
+    <display-name>M-JD2-XXX-XX</display-name>
+    
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+<!--    <servlet>-->
+<!--        <servlet-name>signUp</servlet-name>-->
+<!--        <jsp-file>/signUp.jsp</jsp-file>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>signUp</servlet-name>-->
+<!--        <url-pattern>/signUp</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+
+
+<!--    <servlet>-->
+<!--        <servlet-name>signIn</servlet-name>-->
+<!--        <jsp-file>/signIn.jsp</jsp-file>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>signIn</servlet-name>-->
+<!--        <url-pattern>/signIn</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--    <servlet>-->
+<!--        <servlet-name>message</servlet-name>-->
+<!--        <jsp-file>/message.jsp</jsp-file>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>message</servlet-name>-->
+<!--        <url-pattern>/message</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--    <servlet>-->
+<!--        <servlet-name>chats</servlet-name>-->
+<!--        <jsp-file>/chats.jsp</jsp-file>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>chats</servlet-name>-->
+<!--        <url-pattern>/chats</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--    <filter>-->
+<!--        <filter-name>SecurityFilter</filter-name>-->
+<!--        <filter-class>by.it_academy.jd2.messenger.controller.web.filters.SecurityFilter</filter-class>-->
+<!--        <init-param>-->
+<!--            <param-name>active</param-name>-->
+<!--            <param-value>true</param-value>-->
+<!--        </init-param>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>SecurityFilter</filter-name>-->
+<!--        <url-pattern>/chats</url-pattern>-->
+<!--        <url-pattern>/message</url-pattern>-->
+<!--        <dispatcher>REQUEST</dispatcher>-->
+<!--    </filter-mapping>-->
+
+<!--    <listener>-->
+<!--        <listener-class>by.it_academy.jd2.messenger.controller.web.listeners.SessionChangeListener</listener-class>-->
+<!--    </listener>-->
+</web-app>

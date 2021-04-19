@@ -4,17 +4,12 @@ import by.it_academy.jd2.core.dto.Airport;
 import by.it_academy.jd2.core.dto.Flights;
 import by.it_academy.jd2.dao.AirportDAO;
 import by.it_academy.jd2.dao.FlightsDAO;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -83,12 +78,8 @@ public class SearchServlet extends HttpServlet {
                 if (flights.isEmpty()){
                     req.setAttribute("error", true);
                     req.setAttribute("message", "Ничего не найдено");
-//                    ServletContext context = getServletContext();
-//                    RequestDispatcher dispatcher = context.getRequestDispatcher("/search");
-//                    dispatcher.forward(req,resp);
                     req.getRequestDispatcher("search.jsp").forward(req, resp);
 
-//                    req.getRequestDispatcher("search.jsp").forward(req, resp);
                 }else {
                     req.setAttribute("flights", flights);
                     req.setAttribute("flight", true);

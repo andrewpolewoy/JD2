@@ -1,0 +1,39 @@
+-- Table: messenger.message
+
+-- DROP TABLE messenger.message;
+
+CREATE TABLE messenger.message
+(
+    from_user character varying COLLATE pg_catalog."default" NOT NULL,
+    send_date timestamp with time zone NOT NULL,
+    text character varying COLLATE pg_catalog."default" NOT NULL,
+    recipient character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT fk_login FOREIGN KEY (from_user)
+        REFERENCES messenger.users (login) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE messenger.message
+    OWNER to postgres;
+
+
+-- Table: messenger.users
+
+-- DROP TABLE messenger.users;
+
+CREATE TABLE messenger.users
+(
+    password character varying COLLATE pg_catalog."default" NOT NULL,
+    name character varying COLLATE pg_catalog."default" NOT NULL,
+    login character varying COLLATE pg_catalog."default" NOT NULL,
+    birth_day character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT users_pkey PRIMARY KEY (login)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE messenger.users
+    OWNER to postgres;

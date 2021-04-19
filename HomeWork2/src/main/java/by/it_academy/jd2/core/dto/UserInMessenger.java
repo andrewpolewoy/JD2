@@ -51,7 +51,6 @@ public class UserInMessenger {
         } else {
             throw new IllegalArgumentException("Пользователь с таким логином уже существует");
         }
-
     }
     /**
      * Метод получения значения поля {@link UserInMessenger#message}
@@ -68,8 +67,8 @@ public class UserInMessenger {
         this.message = message;
     }
     /**
-     * Метод получения значения поля {@link UserInMessenger#message}
-     * @return возвращает сообщения
+     * Метод получения значения поля {@link UserInMessenger#name}
+     * @return возвращает имя
      */
     public String getName() {
         return name;
