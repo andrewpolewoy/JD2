@@ -4,6 +4,7 @@ import by.it_academy.jd2.core.dto.Airport;
 import by.it_academy.jd2.core.dto.Flights;
 import by.it_academy.jd2.dao.AirportDAO;
 import by.it_academy.jd2.dao.FlightsDAO;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -60,6 +61,14 @@ public class SearchServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ServletContext context = req.getSession().getServletContext();
+        int page;
+
+        if (req.getParameter("currentPage") == null) {
+            page = 1;
+        } else {
+            page = Integer.parseInt(req.getParameter("currentPage"));
+        }
         List<Airport> airports = null;
         try {
             airports = airportDAO.list();
@@ -74,7 +83,10 @@ public class SearchServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/search");
         }else {
             try {
-                List<Flights> flights = flightsDAO.list(dateDeparture, airportDeparture, airportArrival);
+                int numberOfRows = flightsDAO.getRowCount(dateDeparture, airportDeparture, airportArrival);
+                int rowsOnPage = 25;
+                int maxPage = (int) Math.ceil((double)numberOfRows / rowsOnPage);
+                List<Flights> flights = flightsDAO.list(dateDeparture, airportDeparture, airportArrival,String.valueOf(rowsOnPage),String.valueOf(page));
                 if (flights.isEmpty()){
                     req.setAttribute("error", true);
                     req.setAttribute("message", "Ничего не найдено");
@@ -83,18 +95,17 @@ public class SearchServlet extends HttpServlet {
                 }else {
                     req.setAttribute("flights", flights);
                     req.setAttribute("flight", true);
+                    req.setAttribute("maxPage", maxPage);
+                    req.setAttribute("Departure", airportDeparture);
+                    req.setAttribute("Arrival", airportArrival);
+                    req.setAttribute("timeDeparture", dateDeparture);
+                    req.setAttribute("currentPage", page);
                     req.getRequestDispatcher("search.jsp").forward(req, resp);
-
                 }
-
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
-
-
-
-
     }
 
 }

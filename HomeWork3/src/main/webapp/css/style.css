@@ -21,7 +21,7 @@ body {
 ***********************************************/
 .box,
 .regbox{
-    width: 120px;
+    width: 320px;
     height: 520px;
     background: #2f3542;
     margin: 0;
@@ -37,7 +37,7 @@ body {
 .box,
 .regboxx{
     width: 620px;
-    height: 520px;
+    height: 300px;
     background: #2f3542;
     margin: 0;
     padding: 30px;

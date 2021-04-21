@@ -20,13 +20,17 @@ public class FlightsDAO {
      * @param dateDeparture - дата вылета
      * @param airportDeparture - аэропорт вылета
      * @param airportArrival - аэропорт прилёта
+     * @param limit - количество строк на странице
+     * @param page - страница
      * @throws ClassNotFoundException - ошибка при получении драйвера базы данных
      * @see ClassNotFoundException
      * @return список рейсов
      */
-    public List<Flights> list(String dateDeparture, String airportDeparture, String airportArrival) throws ClassNotFoundException {
+    public List<Flights> list(String dateDeparture, String airportDeparture, String airportArrival, String limit, String page) throws ClassNotFoundException {
         List<Flights> flights = new ArrayList<>();
         Class.forName("org.postgresql.Driver");
+        int limit1 = Integer.parseInt(limit);
+        int offset = (Integer.parseInt(page) - 1) * limit1;
 
         try (
                 Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/demo", "postgres", "postgres");
@@ -35,7 +39,8 @@ public class FlightsDAO {
                         "FROM bookings.flights_v f " +
                         "WHERE  departure_airport_name = '" + airportDeparture + "' AND " +
                         "arrival_airport_name = '" + airportArrival + "' AND scheduled_departure >='" + dateDeparture + "'::date " +
-                        "AND scheduled_departure < ('" + dateDeparture + "'::date + '1 day'::interval)");
+                        "AND scheduled_departure < ('" + dateDeparture + "'::date + '1 day'::interval)" +
+                        "ORDER BY f.scheduled_departure LIMIT " + limit1 + " OFFSET " + offset);
                 ResultSet resultSet = statement.executeQuery();
         ) {
             while (resultSet.next()) {
@@ -53,6 +58,39 @@ public class FlightsDAO {
         }
 
         return flights;
+    }
+
+    /**
+     * Метод, который считает количество строк
+     * @param dateDeparture - дата вылета
+     * @param airportDeparture - аэропорт вылета
+     * @param airportArrival - аэропорт прилёта
+     * @throws ClassNotFoundException - ошибка при получении драйвера базы данных
+     * @see ClassNotFoundException
+     * @return список рейсов
+     */
+    public int getRowCount(String dateDeparture, String airportDeparture, String airportArrival) throws ClassNotFoundException {
+        List<Flights> flights = new ArrayList<>();
+        int numberOfRows = 0;
+        Class.forName("org.postgresql.Driver");
+
+        try (
+                Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/demo", "postgres", "postgres");
+                PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*)" +
+                        "FROM bookings.flights_v  " +
+                        "WHERE  departure_airport_name = '" + airportDeparture + "' AND " +
+                        "arrival_airport_name = '" + airportArrival + "' AND scheduled_departure >='" + dateDeparture + "'::date " +
+                        "AND scheduled_departure < ('" + dateDeparture + "'::date + '1 day'::interval)");
+                ResultSet resultSet = statement.executeQuery();
+        ) {
+            while (resultSet.next()) {
+                numberOfRows = resultSet.getInt(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return numberOfRows;
     }
 
 }

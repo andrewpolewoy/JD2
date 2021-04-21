@@ -124,7 +124,10 @@
                 <version>0.8.6</version>
                 <configuration>
                     <excludes>
-                        <exclude>by/it_academy/jd2/**/*</exclude>
+                        <exclude>**/*AirportServlet.*</exclude>
+                        <exclude>**/*SearchServlet.*</exclude>
+                        <exclude>**/*Airport.*</exclude>
+                        <exclude>**/*Flights.*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

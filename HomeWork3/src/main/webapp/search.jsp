@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*, java.text.*, by.it_academy.jd2.core.dto.Airport" %>
 
 
 <!DOCTYPE html>
@@ -49,36 +50,16 @@
                        <c:choose>
                                <c:when test="${requestScope.flight}">
 
-                               <table>
-                                   <c:forEach items="${flights}" var="flight">
-                                       <tr>
-                                           <td><c:out value="${flight.flight_no}" /></td>
-                                           <td><c:out value="${flight.scheduled_departure}" /></td>
-                                           <td><c:out value="${flight.scheduled_arrival}" /></td>
-                                           <td><c:out value="${flight.departure_airport_name}" /></td>
-                                           <td><c:out value="${flight.arrival_airport_name}" /></td>
-                                           <td><c:out value="${flight.status}" /></td>
-                                       </tr>
-                                   </c:forEach>
-                               </table>
-                               <form action="search" method="post">
-                                   <input type="hidden" name="firstrow" value="${firstrow}">
-                                   <input type="hidden" name="rowcount" value="${rowcount}">
-                                   <input type="submit" name="page" value="next">
-                                   <input type="submit" name="page" value="previous">
-                               </form>
-
-
-                         <table border="3", align="center">
+                               <table border="3", align="center">
                                <caption>Все подходящие рейсы</caption>
-                                 <tr>
-                                   <th>Номер рейса</th>
-                                   <th>Время вылета</th>
-                                   <th>Время прилёта</th>
-                                   <th>Аэропорт вылета</th>
-                                   <th>Аэропорт прилёта</th>
-                                   <th>Статус</th>
-                                 </tr>
+                                   <tr>
+                                     <th>Номер рейса</th>
+                                     <th>Время вылета</th>
+                                     <th>Время прилёта</th>
+                                     <th>Аэропорт вылета</th>
+                                     <th>Аэропорт прилёта</th>
+                                     <th>Статус</th>
+                                   </tr>
                                    <c:forEach items="${flights}" var="flight">
                                        <tr>
                                            <td><c:out value="${flight.flight_no}" /></td>
@@ -90,14 +71,20 @@
                                        </tr>
                                    </c:forEach>
                                </table>
-                               </c:when>
-                               <c:otherwise>
-                               <p></p>
-                               </c:otherwise>
-                           </c:choose>
-                       </c:otherwise>
-                   </c:choose>
 
+                               <p></p>
+                                   <c:if test="${currentPage > 1}">
+                                       <td><a href="search?Departure=${Departure}&Arrival=${Arrival}&timeDeparture=${timeDeparture}&currentPage=${currentPage - 1}">Предыдущая страница</a></td>
+                                   </c:if>
+
+                                   <c:if test="${currentPage ne maxPage}">
+                                       <td><a href="search?Departure=${Departure}&Arrival=${Arrival}&timeDeparture=${timeDeparture}&currentPage=${currentPage + 1}">Следующая страница</a></td>
+                                   </c:if>
+                             </c:when>
+
+                                                  </c:choose>
+                                              </c:otherwise>
+                                          </c:choose>
 
 </div>
 </div>
