@@ -11,7 +11,7 @@ import javax.persistence.Table;
  *  <b>message</b>
  */
 
-@Entity
+@Entity(name = "Airport")
 @Table(name = "airports", schema = "bookings")
 public class Airport {
 
