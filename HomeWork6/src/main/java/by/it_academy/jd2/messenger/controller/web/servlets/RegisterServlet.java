@@ -8,25 +8,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.io.IOException;
 
 /**
- * Cервлет, отвечающий за регистрацию пользователя пользователям.
- * При успешной регистрации происходит переадресацию на страницу входа в учётную запись{@link LoginServlet}.
+ * Cервлет, отвечающий за регистрацию пользователя.
+ * При успешной регистрации происходит переадресацию на страницу входа в учётную запись
  */
 @Controller
 @RequestMapping(value = "/signUp")
 public class RegisterServlet {
 
+    /** Экземпляр класса IUserService */
     private final IUserService userService;
 
+    /**
+     * Конструктор с инициализацией экземпляра класса {@link IUserService}
+     * @param userService класс сервиса пользователя
+     */
     public RegisterServlet(IUserService userService) {
         this.userService = userService;
     }
 
     /**
      * Метод, обрабатывающий GET запросы
-     *
      * @return URL страницы регистрации
      */
     @GetMapping
@@ -36,7 +39,12 @@ public class RegisterServlet {
 
     /**
      * Метод, обрабатывающий POST запросы
-     *
+     * @param login - логин
+     * @param password - пароль
+     * @param name - имя
+     * @param birth - дата рождения
+     * @param model - специальный класс для работы с атрибутами
+     * @return URL страницы для отправки сообщений
      */
     @PostMapping
     public String doPost(@RequestParam(name = "login") String login,

@@ -5,23 +5,27 @@ import by.it_academy.jd2.messenger.storage.IUserRepository;
 import by.it_academy.jd2.messenger.view.api.IUserService;
 import java.util.HashSet;
 
-/**
- * Класс для регистрации и поиска пользователей.
- */
+/** Класс для регистрации и поиска пользователей */
 public class UserService implements IUserService {
 
+    /** Экземпляр класса IUserRepository */
     private final IUserRepository repository;
+
+    /** Экземпляр класса HashSet для хранения списка логинов всех пользователей  */
     static HashSet<String> allUsersLogin = new HashSet<>();
 
+    /**
+     * Конструктор с инициализацией экземпляра класса {@link IUserRepository}
+     * @param repository класс-расширение репозитория пользователей
+     */
     public UserService(IUserRepository repository) {
         this.repository = repository;
     }
 
     /**
      * Метод для получения пользователя по логину
-     *
      * @param login Логин
-     * @return Пользователь с предоставленным логином, если пользователь существует, null, если нет
+     * @return пользователь с предоставленным логином, если пользователь существует, null, если нет
      */
     @Override
     public User getUser(String login) {
@@ -30,8 +34,7 @@ public class UserService implements IUserService {
 
     /**
      * Метод для регистрации пользователя
-     *
-     * @param user Пользователь
+     * @param user пользователь
      */
     @Override
     public void signUp(User user) {
@@ -46,7 +49,6 @@ public class UserService implements IUserService {
 
     /**
      * Метод для проверки все ли поля заполнены данными
-     *
      * @param user Пользователь
      * @throws IllegalArgumentException если поля не заполнены
      */
@@ -59,7 +61,6 @@ public class UserService implements IUserService {
 
     /**
      * Метод для проверки пустая ли строка
-     *
      * @param val Строка
      * @return true  если строка не пустая, false если пустая или null
      */

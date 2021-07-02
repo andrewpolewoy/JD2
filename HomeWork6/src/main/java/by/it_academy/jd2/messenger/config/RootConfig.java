@@ -12,18 +12,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Определение конфигурации для компонентов пользователя
- */
+/** Определение конфигурации для компонентов пользователя */
 @Configuration
 @ComponentScan("by.it_academy.jd2.messenger.config")
 public class RootConfig {
 
     /**
-     * Конфигурация для интерфейса IMessageService
-     *
-     * @param repository Экземпляр репозитория IMessageRepository
-     * @return объект, реализующий интерфейс IMessageService
+     * Конфигурация для интерфейса {@link IMessageService}
+     * @param repository Экземпляр репозитория {@link IMessageRepository}
+     * @return объект, реализующий интерфейс {@link IMessageService}
      */
     @Bean
     public IMessageService getMessageService(IMessageRepository repository) {
@@ -31,10 +28,9 @@ public class RootConfig {
     }
 
     /**
-     * Конфигурация для интерфейса IUserService
-     *
-     * @param repository Экземпляр репозитория IUserRepository
-     * @return объект, реализующий интерфейс IUserService
+     * Конфигурация для интерфейса {@link IUserService}
+     * @param repository Экземпляр репозитория {@link IUserRepository}
+     * @return объект, реализующий интерфейс {@link IUserService}
      */
     @Bean
     public IUserService getUserService(IUserRepository repository) {
@@ -42,10 +38,9 @@ public class RootConfig {
     }
 
     /**
-     * Конфигурация для интерфейса IAuthService
-     *
-     * @param userService Экземпляр интерфейса IUserService
-     * @return объект, реализующий интерфейс IAuthServicee
+     * Конфигурация для интерфейса {@link IAuthService}
+     * @param userService Экземпляр интерфейса {@link IUserService}
+     * @return объект, реализующий интерфейс {@link IAuthService}
      */
     @Bean
     public IAuthService getAuthService(IUserService userService) {

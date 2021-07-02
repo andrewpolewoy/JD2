@@ -14,17 +14,14 @@ import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
 
-/**
- * Класс для создания подключения к базе данных
- */
+/** Класс для создания подключения к базе данных */
 @Configuration
 @EnableJpaRepositories("by.it_academy.jd2.messenger.storage")
 @EnableTransactionManagement
 public class PersistencyConfig {
 
     /**
-     *  Создает пул подключений
-     *
+     * Создает пул подключений
      * @return Объект класса DataSource
      * @throws PropertyVetoException когда свойство представляет недопустимое значение
      */
@@ -45,10 +42,9 @@ public class PersistencyConfig {
     }
 
     /**
-     * Конфигурирует интерфейс EntityManagerFactory
-     *
-     * @param dataSource Объект класса DataSource
-     * @return  EntityManagerFactory в контексте приложения Spring
+     * Конфигурирует интерфейс {@link EntityManagerFactory}
+     * @param dataSource Объект класса {@link DataSource}
+     * @return  {@link EntityManagerFactory} в контексте приложения Spring
      */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
@@ -73,13 +69,11 @@ public class PersistencyConfig {
 
     /**
      * Создает менеджер для создания, фиксации или отката транзакций.
-     *
-     * @param entityManagerFactory Объект класса EntityManagerFactory
-     * @return Объект класса JpaTransactionManager
+     * @param entityManagerFactory Объект класса {@link EntityManagerFactory}
+     * @return Объект класса {@link JpaTransactionManager}
      */
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-
         JpaTransactionManager txManager = new JpaTransactionManager();
         txManager.setEntityManagerFactory(entityManagerFactory);
         return txManager;

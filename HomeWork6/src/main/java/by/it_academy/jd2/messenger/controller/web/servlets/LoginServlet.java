@@ -8,20 +8,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
  * Cервлет, отвечающий за аутентификацию пользователя, при удачном завершении которой
- * происходит переадресация на главную страницу чата  {@link MessengerServlet}.
+ * происходит переадресация на главную страницу чата
  */
 @Controller
 @RequestMapping(value = "/signIn")
 public class LoginServlet {
 
+    /** Экземпляр класса IAuthService */
     private final IAuthService authService;
 
+    /**
+     * Конструктор с инициализацией экземпляра класса {@link IAuthService}
+     * @param authService класс сервиса авторизации пользователя
+     */
     public LoginServlet(IAuthService authService){
         this.authService = authService;
     }
@@ -34,10 +38,15 @@ public class LoginServlet {
     public String doGet() {
         return "/views/signIn.jsp";
     }
+
     /**
      * Метод, обрабатывающий POST запросы
-     *
-     * @return URL
+     * @param req - запрос от пользователя
+     * @param Login - логин
+     * @param Password - пароль
+     * @param model - специальный класс для работы с атрибутами
+     * @return URL страницы для отправки сообщений (при успешной авторизации),
+     * либо страницы авторизации (при неуспешной авторизации)
      */
     @PostMapping
     public String doPost(@RequestParam(name = "login") String Login,

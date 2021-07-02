@@ -3,17 +3,13 @@ package by.it_academy.jd2.messenger.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
-/**
- * Класс User , предназначенный для создания сообщения
- * с параметрами <b>from</b>, <b>sendDate</b>, <b>text</b>
- * реализует интерфейс {@link Serializable}
- */
+/** Класс сообщения, реализует интерфейс {@link Serializable} */
 @Entity(name = "Message")
 @Table(name = "message",schema = "hibernate")
 public class Message implements Serializable {
 
+    /** Поле ID */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -35,18 +31,15 @@ public class Message implements Serializable {
     @Column(name = "text", nullable = false)
     private String text;
 
-    /**
-     * Конструктор без параметров
-     */
+    /** Конструктор без параметров */
     public Message() {
     }
 
     /**
      * Конструктор с параметрами
-     *
      * @param from отправитель
      * @param recipient получатель
-     * @param text Текст
+     * @param text текст
      * @param sendDate Дата отправления
      */
     public Message(String from, String recipient, LocalDateTime sendDate, String text) {
@@ -58,7 +51,7 @@ public class Message implements Serializable {
 
     /**
      * Метод получения значения поля {@link Message#recipient}
-     * @return возвращает логин получателя
+     * @return логин получателя
      */
     public String getRecipient() {
         return recipient;
@@ -66,7 +59,7 @@ public class Message implements Serializable {
 
     /**
      * Метод определения получателя {@link Message#recipient}
-     * @param recipient получателя
+     * @param recipient получатель
      */
     public void setRecipient(String recipient) {
         this.recipient = recipient;
@@ -74,7 +67,7 @@ public class Message implements Serializable {
 
     /**
      * Метод получения значения поля {@link Message#from}
-     * @return возвращает логин отправителя
+     * @return логин отправителя
      */
     public String getFrom() {
         return from;
@@ -82,18 +75,20 @@ public class Message implements Serializable {
 
     /**
      * Метод определения отправителя {@link Message#from}
-     * @param from отправителя
+     * @param from отправитель
      */
     public void setFrom(String from) {
         this.from = from;
     }
+
     /**
      * Метод получения значения поля {@link Message#sendDate}
-     * @return возвращает дату отправки
+     * @return дата отправки
      */
     public LocalDateTime getSendDate() {
         return sendDate;
     }
+
     /**
      * Метод определения даты отправки {@link Message#sendDate}
      * @param sendDate дата отправки
@@ -103,11 +98,12 @@ public class Message implements Serializable {
     }
     /**
      * Метод получения значения поля {@link Message#text}
-     * @return возвращает текст сообщения
+     * @return текст сообщения
      */
     public String getText() {
         return text;
     }
+
     /**
      * Метод определения текста сообщения {@link Message#text}
      * @param text текст сообщения
